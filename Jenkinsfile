@@ -1,5 +1,5 @@
 pipeline{
-    agent any
+    agent sonar
     stages{
         stage("Create Folder"){
             steps{
@@ -11,9 +11,14 @@ pipeline{
                 sh 'mvn clean package'
             }
         }
-        stage("Deploy to Tomcat Dev"){
+        stage("Code Quality"){
             steps{
-                sh 'mvn tomcat7:deploy'
+                sh 'mvn sonar:sonar'
+            }
+        }
+        stage("Deploy to Nexus"){
+            steps{
+                sh 'mvn deploy'
             }
 
         }
