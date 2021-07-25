@@ -1,5 +1,5 @@
 pipeline{
-    agent sonar
+    agent SONAR
     stages{
         stage("Create Folder"){
             steps{
