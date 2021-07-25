@@ -13,7 +13,7 @@ pipeline{
         }
         stage("Deploy to Tomcat Dev"){
             steps{
-                sh ''
+                sh 'mvn tomcat7:deploy'
             }
 
         }
