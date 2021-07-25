@@ -1,29 +1,11 @@
-pipeline{
-    agent {
-           sonar
-    }
-    stages{
-        stage("Create Folder"){
-            steps{
-                sh "mkdir -p ${env.JOB_NAME}"
-            }
-        }
-        stage("Maven Build"){
-            steps{
-                sh 'mvn clean package'
-            }
-        }
-        stage("Code Quality"){
-            steps{
-                sh 'mvn sonar:sonar'
-            }
-        }
-        stage("Deploy to Nexus"){
-            steps{
-                sh 'mvn deploy'
-            }
-
-        }
-    }
+node('sonar'){
+stage('stage1') {
+sh 'mvn clean package'
 }
-
+stage('stage2') {
+sh 'mvn sonar:sonar'
+}
+stage('stage3') {
+sh 'mvn deploy'
+}
+}
